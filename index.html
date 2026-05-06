@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fossils - GEOL201 Earth History</title>
+
   <style>
     * {
       margin: 0;
@@ -25,22 +26,9 @@
       border-bottom: 4px solid #a0632a;
     }
 
-    header h1 {
-      font-size: 2rem;
-      letter-spacing: 0.5px;
-    }
-
-    header p {
-      margin-top: 6px;
-      font-size: 0.95rem;
-      color: #d4b896;
-    }
-
     nav {
       background-color: #8b5e3c;
       display: flex;
-      flex-wrap: wrap;
-      gap: 0;
       border-bottom: 3px solid #a0632a;
     }
 
@@ -49,11 +37,7 @@
       border: none;
       color: #f5ede0;
       padding: 14px 22px;
-      font-size: 0.95rem;
-      font-family: Georgia, serif;
       cursor: pointer;
-      border-right: 1px solid #a0632a;
-      transition: background-color 0.2s;
     }
 
     nav button:hover {
@@ -62,409 +46,139 @@
 
     nav button.active {
       background-color: #c17f47;
-      color: #fff;
       font-weight: bold;
     }
 
     main {
       max-width: 860px;
-      margin: 48px auto;
-      padding: 0 24px;
+      margin: 40px auto;
+      padding: 0 20px;
     }
 
     .tab-content {
       display: none;
       background-color: #fdf6ec;
-      border: 1px solid #c9a87a;
-      border-radius: 4px;
-      padding: 48px 40px;
+      padding: 40px;
+      border-radius: 6px;
     }
 
     .tab-content.active {
       display: block;
     }
 
-    .tab-content h2 {
-      font-size: 1.7rem;
-      color: #6b4423;
-      border-bottom: 2px solid #c9a87a;
-      padding-bottom: 12px;
-      margin-bottom: 24px;
-    }
-
-    .tab-content h3 {
-      font-size: 1.15rem;
-      color: #7a4a20;
-      margin-top: 28px;
-      margin-bottom: 8px;
-    }
-
-    .tab-content p {
-      margin-bottom: 14px;
-      font-size: 0.97rem;
-    }
-
-    .tab-content ul, .tab-content ol {
-      margin: 10px 0 16px 24px;
-      font-size: 0.97rem;
-    }
-
-    .tab-content li {
-      margin-bottom: 6px;
-    }
-
-    .fossil-card {
-      background-color: #f5e8d0;
-      border-left: 4px solid #a0632a;
-      border-radius: 3px;
-      padding: 16px 20px;
+    /* HERO SECTION */
+    .hero-container {
+      position: relative;
+      width: 100%;
       margin: 20px 0;
     }
 
-    .fossil-card h3 {
-      margin-top: 0;
-      color: #5a3010;
-      font-size: 1.1rem;
+    .hero-image {
+      width: 100%;
+      max-height: 400px;
+      object-fit: cover;
+      border-radius: 6px;
     }
 
-    .fossil-card .meta {
-      font-size: 0.85rem;
-      color: #7a5c3a;
-      font-style: italic;
-      margin-bottom: 8px;
+    .hero-container::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.35);
+      border-radius: 6px;
     }
 
-    .ref-list {
-      list-style: decimal;
-      margin-left: 24px;
+    .hero-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      text-align: center;
+      z-index: 2;
     }
 
-    .ref-list li {
-      margin-bottom: 10px;
-      font-size: 0.93rem;
+    .hero-text h1 {
+      font-size: 2.5rem;
     }
 
-    .ref-list em {
-      font-style: italic;
+    .hero-text p {
+      font-size: 1.2rem;
     }
 
     .highlight-box {
       background-color: #eedfc4;
-      border: 1px solid #c9a87a;
-      border-radius: 4px;
-      padding: 16px 20px;
+      padding: 16px;
       margin: 20px 0;
-      font-size: 0.95rem;
+      border-radius: 6px;
     }
 
     footer {
       text-align: center;
-      padding: 24px;
-      margin-top: 60px;
+      padding: 20px;
+      margin-top: 40px;
       background-color: #6b4423;
       color: #d4b896;
-      font-size: 0.85rem;
     }
   </style>
 </head>
+
 <body>
 
-  <header>
-    <h1>Fossils</h1>
-    <p>GEOL201 &mdash; Earth History</p>
-  </header>
+<header>
+  <h1>Fossils</h1>
+  <p>GEOL201 — Earth History</p>
+</header>
 
-  <nav>
-    <button class="active" onclick="showTab('home', this)">Home</button>
-    <button onclick="showTab('what', this)">What Are Fossils?</button>
-    <button onclick="showTab('types', this)">Types of Fossils</button>
-    <button onclick="showTab('formation', this)">Formation Process</button>
-    <button onclick="showTab('discoveries', this)">Famous Discoveries</button>
-    <button onclick="showTab('references', this)">References</button>
-  </nav>
+<nav>
+  <button class="active" onclick="showTab('home', this)">Home</button>
+  <button onclick="showTab('what', this)">What Are Fossils?</button>
+</nav>
 
-  <main>
+<main>
 
-    <!-- HOME -->
-    <div id="home" class="tab-content active">
-      <h2>Welcome</h2>
-      <p>This website is a companion resource for <strong>GEOL201: Earth History</strong>. It explores the world of fossils — what they are, how they form, the different kinds we find, and the landmark discoveries that have shaped our understanding of life on Earth.</p>
-
-      <div class="highlight-box">
-        <strong>Course Context:</strong> GEOL201 examines Earth's 4.54-billion-year history through the rock record, plate tectonics, and the evolution of life. Fossils are one of our primary tools for reading that history — they are the pages of Earth's biography.
-      </div>
-
-      <h3>What This Site Covers</h3>
-      <ul>
-        <li><strong>What Are Fossils?</strong> — A definition of fossils, why they matter to science, and which organisms are most likely to be preserved.</li>
-        <li><strong>Types of Fossils</strong> — From body fossils to trace fossils, amber preservation to microfossils, and the concept of index fossils used in stratigraphy.</li>
-        <li><strong>Formation Process</strong> — A step-by-step look at taphonomy: how an organism goes from death to discovery millions of years later.</li>
-        <li><strong>Famous Discoveries</strong> — Landmark fossil finds that changed science, including <em>Archaeopteryx</em>, Lucy, <em>Tiktaalik</em>, and more.</li>
-        <li><strong>References</strong> — Academic sources and textbooks used throughout the site.</li>
-      </ul>
-
-      <h3>Why Fossils Matter</h3>
-      <p>Fossils are far more than curiosities — they are the primary evidence for biological evolution, the calibration tool for the geologic timescale, and windows into past climates, ecosystems, and mass extinctions. Without the fossil record, our understanding of both life and the planet would be fundamentally incomplete.</p>
-      <p>Paleontology — the science of fossils — sits at the intersection of geology and biology, and its findings touch nearly every aspect of Earth History studied in GEOL201: the Cambrian Explosion, the age of dinosaurs, the rise of mammals, and the emergence of our own species.</p>
+<!-- HOME -->
+<div id="home" class="tab-content active">
+  
+  <div class="hero-container">
+    <img src="image.png" alt="Fossil fish" class="hero-image">
+    <div class="hero-text">
+      <h1>Fossils</h1>
+      <p>Exploring Earth's History Through Time</p>
     </div>
+  </div>
 
-    <!-- WHAT ARE FOSSILS -->
-    <div id="what" class="tab-content">
-      <h2>What Are Fossils?</h2>
+  <p>This website is a companion resource for <strong>GEOL201: Earth History</strong>.</p>
 
-      <h3>Definition</h3>
-      <p>A fossil is any preserved evidence of past life — typically older than 10,000 years, the conventional boundary separating "fossil" from merely old biological material. The word comes from the Latin <em>fossilis</em>, meaning "dug up." Fossils can be the physical remains of an organism (bones, shells, teeth, wood), or indirect evidence of its existence (tracks, burrows, chemical signatures).</p>
+  <div class="highlight-box">
+    Fossils help us understand Earth's history and evolution.
+  </div>
 
-      <h3>How Fossils Differ from Living Organisms</h3>
-      <p>Living organisms are composed of organic molecules — proteins, lipids, nucleic acids, and carbohydrates — that rapidly break down after death through bacterial decomposition, oxidation, and scavenging. In a fossil, this original organic material has typically been replaced by, or mineralized with, inorganic compounds (calcite, silica, iron pyrite, etc.). What remains is a geochemical replica of the original structure, not the original structure itself.</p>
-      <ul>
-        <li>Original soft tissues are almost never preserved (exceptions include amber-entombed insects and permafrost specimens like woolly mammoths)</li>
-        <li>Mineral composition gradually replaces organic composition over geologic time</li>
-        <li>Cellular ultrastructure is largely destroyed, though exceptional sites like the Burgess Shale can retain soft-tissue outlines</li>
-        <li>DNA degrades completely beyond approximately 1–2 million years — the <em>Jurassic Park</em> scenario is not scientifically feasible</li>
-      </ul>
+</div>
 
-      <h3>Why Fossils Matter to Science</h3>
-      <ul>
-        <li><strong>Evolutionary record:</strong> Fossils provide direct, physical evidence of organisms that no longer exist and document evolutionary transitions (e.g., fish-to-tetrapod, dinosaur-to-bird)</li>
-        <li><strong>Biostratigraphy:</strong> Fossil assemblages allow geologists to correlate rock layers across continents and construct the geologic timescale</li>
-        <li><strong>Paleoecology:</strong> Fossils reveal ancient food webs, climate zones, and ecosystem structures</li>
-        <li><strong>Paleoclimatology:</strong> Pollen, foraminifera, and isotopic ratios preserved in fossils help reconstruct past temperatures and atmospheric composition</li>
-        <li><strong>Astrobiology:</strong> Understanding Earth's fossil record informs the search for biosignatures on other planets</li>
-      </ul>
+<!-- WHAT -->
+<div id="what" class="tab-content">
+  <h2>What Are Fossils?</h2>
+  <p>A fossil is preserved evidence of past life.</p>
+</div>
 
-      <h3>Which Organisms Become Fossils?</h3>
-      <p>Fossilization is strongly biased toward organisms with <strong>hard parts</strong> — bone, shell, teeth, wood, chitin — because soft tissue decays rapidly. Most commonly fossilized:</p>
-      <ul>
-        <li>Marine invertebrates (mollusks, brachiopods, echinoderms, corals) — by far the most abundant in the record</li>
-        <li>Vertebrates with mineralized skeletons (fish, reptiles, mammals)</li>
-        <li>Plants with lignified wood or thick, waxy cuticles</li>
-        <li>Organisms with silica or carbonate skeletons (diatoms, foraminifera, radiolarians)</li>
-      </ul>
-      <p>Soft-bodied organisms — jellyfish, worms, most insects — are fossilized only under exceptional "Lagerstätten" conditions, at sites of extraordinary preservation.</p>
+</main>
 
-      <h3>Geological Significance</h3>
-      <p>Fossils are fundamental to the geologic timescale. The boundaries between eons, eras, periods, and epochs are defined largely by abrupt changes in fossil assemblages — particularly the five major mass extinctions (end-Ordovician, Late Devonian, end-Permian, end-Triassic, end-Cretaceous). The entire concept of "deep time" — the Earth being 4.54 billion years old — was first systematically argued through fossil succession by geologists like William Smith, known as "the father of stratigraphy," in the early 19th century.</p>
-    </div>
+<footer>
+  GEOL201 Earth History — Fossils Website
+</footer>
 
-    <!-- TYPES OF FOSSILS -->
-    <div id="types" class="tab-content">
-      <h2>Types of Fossils</h2>
-      <p>Fossils come in many forms depending on which parts of an organism were preserved and by what process. Below are the major categories.</p>
-
-      <div class="fossil-card">
-        <h3>Body Fossils</h3>
-        <p>The most familiar type — preserved physical remains of an organism's actual body, including bones, teeth, shells, wood, and pollen. Rarely preserves soft tissue; what survives is typically the mineral-replaced original structure.</p>
-        <p><em>Examples: T. rex skull, clam shells in limestone, shark teeth in marine sediment.</em></p>
-      </div>
-
-      <div class="fossil-card">
-        <h3>Trace Fossils (Ichnofossils)</h3>
-        <p>Preserved evidence of an organism's <em>behavior</em> rather than its body — footprints, burrows, borings, feeding marks, nesting structures, and fecal material (coprolites). Trace fossils record activity, not anatomy, and can exist without any body fossil of the maker.</p>
-        <p><em>Examples: Dinosaur footprints at Dinosaur Ridge, Colorado; spiral marine shrimp burrows (Ophiomorpha); early tetrapod trackways in Permian sandstone.</em></p>
-      </div>
-
-      <div class="fossil-card">
-        <h3>Mold Fossils</h3>
-        <p>A negative impression left in sediment or rock after the original hard parts dissolve away. The external mold preserves the shape of the organism's surface; the internal mold (steinkern) preserves the shape of its interior cavity. Molds are common in carbonate rocks but often overlooked.</p>
-        <p><em>Example: A shell dissolves from limestone, leaving a shell-shaped void — that void is the mold.</em></p>
-      </div>
-
-      <div class="fossil-card">
-        <h3>Cast Fossils</h3>
-        <p>When a mold subsequently fills with sediment or minerals, the resulting solid object — a positive replica of the original — is a cast. Casts and molds are genetically linked: the mold comes first, the cast is the infill. Unlike permineralization, casts fill a void left after complete dissolution of the original material.</p>
-        <p><em>Examples: Pyrite-filled ammonite molds; petrified wood in which silica fills tree tissue molds.</em></p>
-      </div>
-
-      <div class="fossil-card">
-        <h3>Compression Fossils</h3>
-        <p>Formed when an organism is buried and compacted under sediment pressure, leaving a thin carbonaceous film on a rock surface. Most three-dimensional structure is lost, but fine details of shape and texture can be preserved. Common in fine-grained lake sediments, deltaic shales, and coal measures.</p>
-        <p><em>Examples: Fern fronds in Carboniferous shales; Archaeopteryx feather impressions in Solnhofen limestone; leaf fossils in Wyoming's Green River Formation.</em></p>
-      </div>
-
-      <div class="fossil-card">
-        <h3>Permineralized Fossils</h3>
-        <p>Groundwater carrying dissolved minerals (silica, calcite, iron compounds) percolates through porous bone, wood, or shell, precipitating mineral crystals in void spaces. Original material partially remains; minerals fill the pores. This is the most common mechanism for producing three-dimensionally preserved fossils, and can preserve microstructure such as bone cells and wood growth rings.</p>
-        <p><em>Examples: Petrified wood at Petrified Forest National Park, Arizona; dinosaur bone permineralized with calcite and iron oxides.</em></p>
-      </div>
-
-      <div class="fossil-card">
-        <h3>Amber Fossils (Resinite Preservation)</h3>
-        <p>Organisms trapped in tree resin, which polymerizes and hardens over millions of years into amber. Provides the most spectacular soft-tissue preservation known — organisms can appear virtually intact, with muscles, setae, wing venation, and even trapped air bubbles preserved. Note: DNA does <em>not</em> survive intact in amber.</p>
-        <p><em>Examples: Insects and spiders in ~99 Ma Burmese amber; a feathered dinosaur tail tip described in 2016; frogs in Dominican amber (~20–40 Ma).</em></p>
-      </div>
-
-      <div class="fossil-card">
-        <h3>Microfossils</h3>
-        <p>Fossils requiring microscopy or SEM to study, typically under 1 mm. Arguably <em>more</em> scientifically useful than large fossils for biostratigraphy and paleoclimate reconstruction because they are abundant, globally distributed, and easily extracted from drill cores.</p>
-        <p><em>Examples: Foraminifera used to reconstruct ocean temperatures; pollen grains used to reconstruct past vegetation; conodonts used as index fossils for Paleozoic stratigraphy.</em></p>
-      </div>
-
-      <div class="fossil-card">
-        <h3>Index Fossils (Zone Fossils)</h3>
-        <p>Not a preservation type, but a category based on biostratigraphic usefulness. An index fossil belongs to a species with: (1) wide geographic distribution, (2) short temporal range, and (3) abundance and easy recognition. Used to date and correlate rock layers globally.</p>
-        <p><em>Examples: Trilobites (Cambrian–Devonian); ammonites (Mesozoic); Nummulites foraminifera (Eocene). If a rock contains Paradoxides trilobites, it is Middle Cambrian — globally.</em></p>
-      </div>
-
-      <div class="fossil-card">
-        <h3>Chemical / Molecular Fossils (Chemofossils)</h3>
-        <p>Preserved organic molecules (biomarkers) or isotopic signatures indicating past biological activity, even when no visible remains exist. Extends the fossil record far beyond the Cambrian into the Archean, where hard-part preservation is impossible.</p>
-        <p><em>Examples: Hopanes from ancient bacterial membranes; steranes as evidence of eukaryotic cells; carbon isotope excursions at mass extinction boundaries.</em></p>
-      </div>
-    </div>
-
-    <!-- FORMATION PROCESS -->
-    <div id="formation" class="tab-content">
-      <h2>Formation Process</h2>
-      <p>Fossilization — studied formally as <strong>taphonomy</strong> — is extraordinarily rare. Estimates suggest fewer than 1 in 1 billion organisms that ever lived left any fossil record. The process involves several sequential stages, each of which can prevent preservation if conditions are wrong.</p>
-
-      <h3>Stage 1: Death and Initial Exposure</h3>
-      <p>An organism dies from predation, starvation, disease, environmental change, or a catastrophic event. In the brief window immediately after death, the body faces:</p>
-      <ul>
-        <li><strong>Scavenging</strong> — carnivores and insects remove soft tissue and scatter bones</li>
-        <li><strong>Microbial decomposition</strong> — bacteria break down soft tissue within days to weeks</li>
-        <li><strong>Physical disarticulation</strong> — currents, wave action, and bioturbation scatter skeletal elements</li>
-      </ul>
-      <div class="highlight-box">Rapid burial is the single most critical factor in fossil formation. Every hour of surface exposure exponentially reduces preservation potential.</div>
-
-      <h3>Stage 2: Burial</h3>
-      <p>Sediment covers the remains, cutting off oxygen supply and dramatically slowing microbial decay. The type and speed of burial determines preservation quality:</p>
-      <ul>
-        <li><strong>Marine environments</strong> dominate the fossil record — organisms settle onto the seafloor and are covered by continuous sediment rain</li>
-        <li><strong>Fluvial (river) environments</strong> — carcasses transported by floods, deposited in floodplain sediments (common for dinosaurs)</li>
-        <li><strong>Volcanic ashfall</strong> — instantaneous burial preserves extraordinary detail (Laetoli footprints, preserved under ash)</li>
-        <li><strong>Bog/peat burial</strong> — acidic, anoxic conditions preserve organic material (bog bodies in northern Europe)</li>
-        <li><strong>Permafrost</strong> — sub-freezing temperatures halt decomposition entirely (woolly mammoths in Siberian permafrost)</li>
-        <li><strong>Amber entrapment</strong> — tree resin seals organisms from oxygen and bacteria</li>
-      </ul>
-      <p><strong>Conditions that favor preservation:</strong> rapid burial, anoxic environment, presence of hard parts, fine-grained sediment, and chemically stable (neutral to alkaline) burial medium. Acidic conditions dissolve bone.</p>
-
-      <h3>Stage 3: Soft Tissue Decay and Hard Part Survival</h3>
-      <p>Even under sediment, soft tissue continues to decompose slowly via anaerobic bacteria. Over years to centuries, flesh and organs disappear completely in most cases. Bones, teeth, and shells survive due to their mineral composition. Occasionally, decay itself aids preservation: phosphatization of soft tissue can occur when decaying bacteria create locally phosphorus-rich chemical environments.</p>
-
-      <h3>Stage 4: Diagenesis — Mineral Replacement and Permineralization</h3>
-      <p>Over thousands to millions of years, as burial deepens, groundwater interacts with the remains:</p>
-      <ul>
-        <li><strong>Permineralization:</strong> Mineral-laden groundwater percolates through porous bone or wood, precipitating crystals in void spaces. Original material persists between mineral infill.</li>
-        <li><strong>Replacement:</strong> Original bone mineral (hydroxyapatite) is dissolved and replaced molecule by molecule with silica, pyrite, calcite, or dolomite. External form is preserved but original chemistry is gone.</li>
-        <li><strong>Recrystallization:</strong> The original mineral structure coarsens or transforms to a more stable polymorph, sometimes obliterating internal microstructure.</li>
-      </ul>
-
-      <h3>Stage 5: Lithification</h3>
-      <p>The surrounding sediment compacts and cements into rock, locking the fossil in place as part of a sedimentary rock unit. Pressure and heat from overlying rock can distort, flatten, or destroy fossils — deep burial in tectonically active zones is generally fatal to preservation.</p>
-
-      <h3>Stage 6: Uplift and Erosion</h3>
-      <p>Tectonic forces uplift rock layers toward the surface over millions of years. Erosion by wind, rain, and ice then strips away overlying rock, slowly revealing the fossil. This is a race against time: too little erosion and the fossil is never exposed; too much and it weathers out and is destroyed. The window of exposure can be as short as decades in badlands environments.</p>
-
-      <h3>Stage 7: Discovery</h3>
-      <p>A paleontologist, fossil hunter, or member of the public finds the fossil. Most significant discoveries are made in <strong>arid badlands</strong> — the Gobi Desert, Hell Creek Formation, the Sahara, Patagonia — where erosion is rapid and sparse vegetation leaves rock exposures visible.</p>
-    </div>
-
-    <!-- FAMOUS DISCOVERIES -->
-    <div id="discoveries" class="tab-content">
-      <h2>Famous Discoveries</h2>
-      <p>A handful of fossil discoveries have fundamentally changed our understanding of life, evolution, and Earth's history. These are among the most significant.</p>
-
-      <div class="fossil-card">
-        <h3>Archaeopteryx lithographica — The First Bird</h3>
-        <div class="meta">Bavaria, Germany &bull; First recognized 1861</div>
-        <p>Discovered just two years after Darwin published <em>On the Origin of Species</em>, <em>Archaeopteryx</em> became the most powerful early evidence for evolution. It possessed both dinosaurian features (teeth, clawed wings, long bony tail) and avian features (feathers, wishbone), making it the definitive transitional fossil between non-avian dinosaurs and modern birds. Thirteen specimens are known.</p>
-      </div>
-
-      <div class="fossil-card">
-        <h3>Lucy (Australopithecus afarensis)</h3>
-        <div class="meta">Hadar, Ethiopia &bull; 1974 &bull; Donald Johanson &amp; Tom Gray</div>
-        <p>At 3.2 million years old, "Lucy" (AL 288-1) was the oldest and most complete early hominin skeleton known at the time — roughly 40% recovered, extraordinary for a specimen of that age. Her anatomy confirmed that bipedal locomotion (upright walking) predated large brain development in human evolution, overturning earlier assumptions. Named after the Beatles song playing in camp the night of the discovery.</p>
-      </div>
-
-      <div class="fossil-card">
-        <h3>Tiktaalik roseae — The Fish with Shoulders</h3>
-        <div class="meta">Ellesmere Island, Arctic Canada &bull; Excavated 2004, published 2006 &bull; Daeschler, Shubin, Jenkins</div>
-        <p><em>Tiktaalik</em> (375 Ma, Late Devonian) is the finest known transitional fossil between lobe-finned fish and four-limbed vertebrates. It had gills <em>and</em> primitive lungs, fish-like scales, a neck (fish cannot turn their heads), and fins with an internal skeleton homologous to the tetrapod wrist and elbow. Crucially, its discovery was <em>predicted</em> — Shubin's team searched specifically in Late Devonian arctic strata because evolutionary theory said the fish-tetrapod transition should occur in that time window.</p>
-      </div>
-
-      <div class="fossil-card">
-        <h3>The Burgess Shale Fauna</h3>
-        <div class="meta">Yoho National Park, British Columbia &bull; Discovered 1909 (Walcott); re-studied 1970s–80s</div>
-        <p>The Burgess Shale (508 Ma, Middle Cambrian) is the world's most famous Lagerstätte — a site of extraordinary preservation where soft-bodied organisms are preserved in remarkable detail. Over 65,000 specimens representing ~150 species have been recovered, most with no mineralized parts at all. Organisms include <em>Anomalocaris</em> (the apex predator of Cambrian seas) and <em>Opabinia</em> (five-eyed, with a frontal grasping appendage). The site fundamentally transformed understanding of the Cambrian Explosion and early animal evolution. Now a UNESCO World Heritage Site.</p>
-      </div>
-
-      <div class="fossil-card">
-        <h3>T. rex "Sue"</h3>
-        <div class="meta">Hell Creek Formation, South Dakota &bull; 1990 &bull; Susan Hendrickson</div>
-        <p>"Sue" (FMNH PR 2081) is the largest, most complete, and best-preserved <em>T. rex</em> skeleton ever found — approximately 90% complete. At 40.5 feet long, she was estimated at 28–33 years old at death. Sue revealed details of <em>T. rex</em> pathology: evidence of trichomonosis infection (the same parasite affecting modern raptors), healed rib fractures, and gout-like bone lesions. The specimen auctioned at Sotheby's in 1997 for $8.36 million — then a world record for any fossil. Now on display at the Field Museum of Natural History, Chicago.</p>
-      </div>
-
-      <div class="fossil-card">
-        <h3>Laetoli Footprints</h3>
-        <div class="meta">Laetoli, Tanzania &bull; 1978 &bull; Mary Leakey's team</div>
-        <p>A 27-meter trackway of 70 hominin footprints, preserved in volcanic ash dated to 3.6–3.7 million years ago. Made by at least two individuals of <em>Australopithecus afarensis</em> walking upright through wet ash that then hardened. This is the oldest direct physical evidence of bipedal locomotion in the human lineage — not inferred from bone structure, but recorded as actual footsteps. The site remains <em>in situ</em> in Tanzania (covered and reburied for protection) and is a UNESCO World Heritage Site.</p>
-      </div>
-
-      <div class="fossil-card">
-        <h3>Pakicetus — The Walking Whale</h3>
-        <div class="meta">Kuldana Formation, Pakistan &bull; First fragments 1979; more complete material through 2001 &bull; Gingerich et al.</div>
-        <p><em>Pakicetus</em> (~53 Ma, Early Eocene) is the oldest known whale ancestor — and it walked on four legs. A terrestrial or semi-aquatic mammal the size of a wolf, it possessed the one defining anatomical feature that identifies it as a cetacean: a uniquely thickened and dense ear bone found only in whales and dolphins. Its discovery, combined with subsequent finds of <em>Ambulocetus</em> and <em>Rodhocetus</em>, documents one of the most complete evolutionary transitions in the fossil record: a land mammal returning to the sea over ~15 million years.</p>
-      </div>
-
-      <div class="fossil-card">
-        <h3>Ediacaran Fossils (Mistaken Point, Newfoundland)</h3>
-        <div class="meta">Newfoundland, Canada &amp; Ediacara Hills, Australia &bull; Australian fauna first described 1947 (Reg Sprigg)</div>
-        <p>The Ediacaran biota (635–541 Ma) represents the oldest known complex multicellular organisms — predating the Cambrian Explosion. These soft-bodied organisms are preserved as impressions in deep-sea volcanic ash beds. Their body plans are radically different from any living animals: some are frond-like (<em>Charnia</em>), some disc-shaped (<em>Aspidella</em>), some quilted and segmented (<em>Dickinsonia</em>). Whether they are stem-group animals or represent an entirely extinct kingdom of life remains debated. Mistaken Point is a UNESCO World Heritage Site.</p>
-      </div>
-    </div>
-
-    <!-- REFERENCES -->
-    <div id="references" class="tab-content">
-      <h2>References</h2>
-      <p>The following sources were used in the research and writing of this site. Students seeking additional depth should consult current issues of the <em>Journal of Vertebrate Paleontology</em>, <em>Palaeontology</em>, and the <em>Annual Review of Earth and Planetary Sciences</em>.</p>
-
-      <h3>Textbooks</h3>
-      <ol class="ref-list">
-        <li>Benton, M.J. &amp; Harper, D.A.T. (2009). <em>Introduction to Paleobiology and the Fossil Record</em>. Wiley-Blackwell.</li>
-        <li>Prothero, D.R. (2013). <em>Bringing Fossils to Life</em> (3rd ed.). Columbia University Press.</li>
-        <li>Briggs, D.E.G. &amp; Crowther, P.R. (eds.) (1990). <em>Palaeobiology: A Synthesis</em>. Blackwell Scientific.</li>
-        <li>Seilacher, A. (2008). <em>Fossil Art</em>. Royal Tyrrell Museum of Palaeontology.</li>
-      </ol>
-
-      <h3>Journal Articles</h3>
-      <ol class="ref-list">
-        <li>Briggs, D.E.G. (2003). The Role of Decay and Mineralization in the Preservation of Soft-Bodied Fossils. <em>Annual Review of Earth and Planetary Sciences</em>, 31, 275–301.</li>
-        <li>Behrensmeyer, A.K. &amp; Kidwell, S.M. (1985). Taphonomy's Contributions to Paleobiology. <em>Paleobiology</em>, 11(1), 105–119.</li>
-        <li>Johanson, D. &amp; Taieb, M. (1976). Plio-Pleistocene hominid discoveries in Hadar, Ethiopia. <em>Nature</em>, 260, 293–297.</li>
-        <li>Daeschler, E.B., Shubin, N.H. &amp; Jenkins, F.A. (2006). A Devonian tetrapod-like fish and the evolution of the tetrapod body plan. <em>Nature</em>, 440, 757–763.</li>
-        <li>Leakey, M.D. &amp; Hay, R.L. (1979). Pliocene footprints in the Laetolil Beds at Laetoli, northern Tanzania. <em>Nature</em>, 278, 317–323.</li>
-        <li>Gingerich, P.D. et al. (2001). Origin of Whales from Early Artiodactyls: Hands and Feet of Eocene Protocetidae from Pakistan. <em>Science</em>, 293, 2239–2242.</li>
-        <li>Narbonne, G.M. (2005). The Ediacara Biota: Neoproterozoic Origin of Animals and Their Ecosystems. <em>Annual Review of Earth and Planetary Sciences</em>, 33, 421–442.</li>
-        <li>Xing, L. et al. (2016). A Feathered Dinosaur Tail with Primitive Plumage Trapped in Mid-Cretaceous Amber. <em>Current Biology</em>, 26(24), 3352–3360.</li>
-        <li>Allentoft, M.E. et al. (2012). The half-life of DNA in bone: measuring decay kinetics in 158 dated fossils. <em>Proceedings of the Royal Society B</em>, 279, 4724–4733.</li>
-        <li>Whittington, H.B. &amp; Briggs, D.E.G. (1985). The largest Cambrian animal, <em>Anomalocaris</em>, Burgess Shale, British Columbia. <em>Philosophical Transactions of the Royal Society B</em>, 309, 569–609.</li>
-        <li>Brochu, C.A. (2003). Osteology of <em>Tyrannosaurus rex</em>: Insights from a Nearly Complete Skeleton and High-Resolution Computed Tomographic Analysis of the Skull. <em>Journal of Vertebrate Paleontology</em>, 22(S4), 1–138.</li>
-      </ol>
-
-      <h3>Books (Popular Science)</h3>
-      <ol class="ref-list">
-        <li>Gould, S.J. (1989). <em>Wonderful Life: The Burgess Shale and the Nature of History</em>. W.W. Norton.</li>
-        <li>Conway Morris, S. (1998). <em>The Crucible of Creation: The Burgess Shale and the Rise of Animals</em>. Oxford University Press.</li>
-        <li>Shubin, N. (2008). <em>Your Inner Fish: A Journey into the 3.5-Billion-Year History of the Human Body</em>. Pantheon Books.</li>
-        <li>Wellnhofer, P. (2009). <em>Archaeopteryx: The Icon of Evolution</em>. Verlag Dr. Friedrich Pfeil.</li>
-      </ol>
-    </div>
-
-  </main>
-
-  <footer>
-    GEOL201 Earth History &mdash; Fossils Website Draft
-  </footer>
-
-  <script>
-    function showTab(id, btn) {
-      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-      document.querySelectorAll('nav button').forEach(el => el.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-      btn.classList.add('active');
-    }
-  </script>
+<script>
+function showTab(id, btn) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(el => el.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
 
 </body>
 </html>
