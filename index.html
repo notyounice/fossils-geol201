@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fossils - GEOL201 Earth History</title>
-
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
@@ -20,24 +23,57 @@
     }
 
     header {
-      background-color: #6b4423;
-      color: #f5ede0;
-      padding: 32px 40px;
+      min-height: 360px;
+      color: #fff7ec;
+      padding: 42px 40px;
       border-bottom: 4px solid #a0632a;
+      background:
+        linear-gradient(rgba(55, 33, 15, 0.70), rgba(55, 33, 15, 0.70)),
+        url("https://images.unsplash.com/photo-1584304383083-4b6aab0d5d61?auto=format&fit=crop&w=1600&q=80");
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-text {
+      max-width: 780px;
+    }
+
+    header h1 {
+      font-size: clamp(2.4rem, 6vw, 4.7rem);
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+    }
+
+    header p {
+      font-size: 1.15rem;
+      color: #f4d9b5;
+      max-width: 650px;
     }
 
     nav {
       background-color: #8b5e3c;
       display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0;
       border-bottom: 3px solid #a0632a;
+      position: sticky;
+      top: 0;
+      z-index: 10;
     }
 
     nav button {
       background: none;
       border: none;
       color: #f5ede0;
-      padding: 14px 22px;
+      padding: 14px 18px;
+      font-size: 0.95rem;
+      font-family: Georgia, serif;
       cursor: pointer;
+      border-right: 1px solid #a0632a;
+      transition: background-color 0.2s, transform 0.2s;
     }
 
     nav button:hover {
@@ -46,139 +82,406 @@
 
     nav button.active {
       background-color: #c17f47;
+      color: #fff;
       font-weight: bold;
     }
 
     main {
-      max-width: 860px;
-      margin: 40px auto;
-      padding: 0 20px;
+      max-width: 980px;
+      margin: 48px auto;
+      padding: 0 24px;
     }
 
     .tab-content {
       display: none;
       background-color: #fdf6ec;
-      padding: 40px;
-      border-radius: 6px;
+      border: 1px solid #c9a87a;
+      border-radius: 14px;
+      padding: 48px 40px;
+      box-shadow: 0 12px 30px rgba(72, 45, 20, 0.13);
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .tab-content.active {
       display: block;
     }
 
-    /* HERO SECTION */
-    .hero-container {
-      position: relative;
+    .tab-content h2 {
+      font-size: 1.9rem;
+      color: #6b4423;
+      border-bottom: 2px solid #c9a87a;
+      padding-bottom: 12px;
+      margin-bottom: 24px;
+    }
+
+    .tab-content h3 {
+      font-size: 1.2rem;
+      color: #7a4a20;
+      margin-top: 28px;
+      margin-bottom: 8px;
+    }
+
+    .tab-content p {
+      margin-bottom: 14px;
+      font-size: 0.98rem;
+    }
+
+    .tab-content ul,
+    .tab-content ol {
+      margin: 10px 0 16px 24px;
+      font-size: 0.98rem;
+    }
+
+    .tab-content li {
+      margin-bottom: 7px;
+    }
+
+    .image-banner {
       width: 100%;
+      height: 260px;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 1px solid #c9a87a;
+      margin: 8px 0 26px;
+    }
+
+    .image-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+      margin: 24px 0;
+    }
+
+    figure {
+      background-color: #f5e8d0;
+      border: 1px solid #d1b48b;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    figure img {
+      width: 100%;
+      height: 170px;
+      object-fit: cover;
+      display: block;
+    }
+
+    figcaption {
+      padding: 12px 14px;
+      font-size: 0.88rem;
+      color: #5a3010;
+    }
+
+    .fossil-card {
+      background-color: #f5e8d0;
+      border-left: 4px solid #a0632a;
+      border-radius: 10px;
+      padding: 18px 20px;
       margin: 20px 0;
     }
 
-    .hero-image {
-      width: 100%;
-      max-height: 400px;
-      object-fit: cover;
-      border-radius: 6px;
+    .fossil-card h3 {
+      margin-top: 0;
+      color: #5a3010;
+      font-size: 1.12rem;
     }
 
-    .hero-container::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.35);
-      border-radius: 6px;
+    .fossil-card .meta {
+      font-size: 0.86rem;
+      color: #7a5c3a;
+      font-style: italic;
+      margin-bottom: 8px;
     }
 
-    .hero-text {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: white;
-      text-align: center;
-      z-index: 2;
+    .ref-list {
+      list-style: decimal;
+      margin-left: 24px;
     }
 
-    .hero-text h1 {
-      font-size: 2.5rem;
-    }
-
-    .hero-text p {
-      font-size: 1.2rem;
+    .ref-list li {
+      margin-bottom: 10px;
+      font-size: 0.93rem;
     }
 
     .highlight-box {
       background-color: #eedfc4;
-      padding: 16px;
+      border: 1px solid #c9a87a;
+      border-radius: 10px;
+      padding: 16px 20px;
       margin: 20px 0;
-      border-radius: 6px;
+      font-size: 0.96rem;
+    }
+
+    .two-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      align-items: center;
+      margin: 22px 0;
+    }
+
+    .two-column img {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid #c9a87a;
     }
 
     footer {
       text-align: center;
-      padding: 20px;
-      margin-top: 40px;
+      padding: 24px;
+      margin-top: 60px;
       background-color: #6b4423;
       color: #d4b896;
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 700px) {
+      header {
+        padding: 32px 24px;
+        min-height: 300px;
+      }
+
+      nav {
+        position: static;
+      }
+
+      nav button {
+        width: 50%;
+        border-bottom: 1px solid #a0632a;
+      }
+
+      main {
+        margin: 28px auto;
+        padding: 0 14px;
+      }
+
+      .tab-content {
+        padding: 30px 22px;
+      }
+
+      .two-column {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
-
 <body>
-
-<header>
-  <h1>Fossils</h1>
-  <p>GEOL201 — Earth History</p>
-</header>
-
-<nav>
-  <button class="active" onclick="showTab('home', this)">Home</button>
-  <button onclick="showTab('what', this)">What Are Fossils?</button>
-</nav>
-
-<main>
-
-<!-- HOME -->
-<div id="home" class="tab-content active">
-  
-  <div class="hero-container">
-    <img src="image.png" alt="Fossil fish" class="hero-image">
+  <header>
     <div class="hero-text">
       <h1>Fossils</h1>
-      <p>Exploring Earth's History Through Time</p>
+      <p>GEOL201 Earth History project exploring fossil types, fossil formation, and famous discoveries that changed science.</p>
     </div>
-  </div>
+  </header>
 
-  <p>This website is a companion resource for <strong>GEOL201: Earth History</strong>.</p>
+  <nav aria-label="Website sections">
+    <button class="active" onclick="showTab('home', this)">Home</button>
+    <button onclick="showTab('what', this)">What Are Fossils?</button>
+    <button onclick="showTab('types', this)">Types of Fossils</button>
+    <button onclick="showTab('formation', this)">Formation Process</button>
+    <button onclick="showTab('discoveries', this)">Famous Discoveries</button>
+    <button onclick="showTab('references', this)">References</button>
+  </nav>
 
-  <div class="highlight-box">
-    Fossils help us understand Earth's history and evolution.
-  </div>
+  <main>
+    <section id="home" class="tab-content active">
+      <h2>Welcome</h2>
+      <img class="image-banner" src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=1400&q=80" alt="Rocky earth-toned landscape" />
 
-</div>
+      <p>This website is a companion resource for <strong>GEOL201: Earth History</strong>. It explores the world of fossils: what they are, how they form, the different kinds we find, and the landmark discoveries that shaped our understanding of life on Earth.</p>
 
-<!-- WHAT -->
-<div id="what" class="tab-content">
-  <h2>What Are Fossils?</h2>
-  <p>A fossil is preserved evidence of past life.</p>
-</div>
+      <div class="highlight-box">
+        <strong>Course Context:</strong> GEOL201 examines Earth's 4.54-billion-year history through the rock record, plate tectonics, and the evolution of life. Fossils are one of our primary tools for reading that history.
+      </div>
 
-</main>
+      <h3>What This Site Covers</h3>
+      <ul>
+        <li><strong>What Are Fossils?</strong> — A definition of fossils, why they matter to science, and which organisms are most likely to be preserved.</li>
+        <li><strong>Types of Fossils</strong> — Body fossils, trace fossils, amber preservation, microfossils, and index fossils.</li>
+        <li><strong>Formation Process</strong> — A step-by-step look at how an organism goes from death to discovery.</li>
+        <li><strong>Famous Discoveries</strong> — Fossil finds such as <em>Archaeopteryx</em>, Lucy, <em>Tiktaalik</em>, and Sue the <em>T. rex</em>.</li>
+      </ul>
 
-<footer>
-  GEOL201 Earth History — Fossils Website
-</footer>
+      <div class="image-grid">
+        <figure>
+          <img src="https://images.unsplash.com/photo-1614732414444-096e5f1122d5?auto=format&fit=crop&w=900&q=80" alt="Stone texture resembling fossil rock layers" />
+          <figcaption>Rock layers preserve clues about Earth's past environments.</figcaption>
+        </figure>
+        <figure>
+          <img src="https://images.unsplash.com/photo-1611095965923-b8b19341af7f?auto=format&fit=crop&w=900&q=80" alt="Museum-style fossil display" />
+          <figcaption>Fossils help scientists study extinct organisms and ancient ecosystems.</figcaption>
+        </figure>
+        <figure>
+          <img src="https://images.unsplash.com/photo-1603736087997-5daec6092347?auto=format&fit=crop&w=900&q=80" alt="Desert rock formation" />
+          <figcaption>Many fossils are found in exposed rock formations and badlands.</figcaption>
+        </figure>
+      </div>
+    </section>
 
-<script>
-function showTab(id, btn) {
-  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-  document.querySelectorAll('nav button').forEach(el => el.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  btn.classList.add('active');
-}
-</script>
+    <section id="what" class="tab-content">
+      <h2>What Are Fossils?</h2>
+      <div class="two-column">
+        <div>
+          <h3>Definition</h3>
+          <p>A fossil is preserved evidence of past life. Fossils can be physical remains, such as bones, shells, teeth, and wood, or indirect evidence, such as tracks, burrows, and chemical signatures.</p>
+          <p>The word comes from the Latin <em>fossilis</em>, meaning “dug up.”</p>
+        </div>
+        <img src="https://images.unsplash.com/photo-1551244072-5d12893278ab?auto=format&fit=crop&w=900&q=80" alt="Fossil-like shell pattern in stone" />
+      </div>
 
+      <h3>Why Fossils Matter to Science</h3>
+      <ul>
+        <li><strong>Evolutionary record:</strong> Fossils provide physical evidence of organisms that no longer exist.</li>
+        <li><strong>Biostratigraphy:</strong> Fossil assemblages help geologists compare and date rock layers.</li>
+        <li><strong>Paleoecology:</strong> Fossils reveal ancient food webs, climate zones, and ecosystems.</li>
+        <li><strong>Paleoclimatology:</strong> Fossils such as pollen and foraminifera help reconstruct past climates.</li>
+      </ul>
+
+      <h3>Which Organisms Become Fossils?</h3>
+      <p>Fossilization is biased toward organisms with hard parts, such as bone, shell, teeth, wood, or chitin, because soft tissues decay quickly. Marine invertebrates, vertebrates, plants, and microscopic organisms are common in the fossil record.</p>
+    </section>
+
+    <section id="types" class="tab-content">
+      <h2>Types of Fossils</h2>
+      <p>Fossils come in many forms depending on which parts of an organism were preserved and by what process.</p>
+
+      <div class="fossil-card">
+        <h3>Body Fossils</h3>
+        <p>Preserved physical remains of an organism, including bones, teeth, shells, wood, and pollen.</p>
+      </div>
+
+      <div class="fossil-card">
+        <h3>Trace Fossils</h3>
+        <p>Preserved evidence of behavior rather than the body itself, such as footprints, burrows, feeding marks, nests, and coprolites.</p>
+      </div>
+
+      <div class="fossil-card">
+        <h3>Mold and Cast Fossils</h3>
+        <p>A mold is a negative impression left after the original organism dissolves. A cast forms when that mold fills with sediment or minerals.</p>
+      </div>
+
+      <div class="fossil-card">
+        <h3>Compression Fossils</h3>
+        <p>These form when an organism is buried and squeezed, often leaving a thin carbon film or flat impression.</p>
+      </div>
+
+      <div class="fossil-card">
+        <h3>Permineralized Fossils</h3>
+        <p>Mineral-rich groundwater fills tiny spaces in bones or wood, preserving the original shape and sometimes fine details.</p>
+      </div>
+
+      <div class="fossil-card">
+        <h3>Amber Fossils</h3>
+        <p>Small organisms can become trapped in tree resin, which hardens into amber over millions of years.</p>
+      </div>
+
+      <div class="image-grid">
+        <figure>
+          <img src="https://images.unsplash.com/photo-1588964895597-cfccd6e2dbf9?auto=format&fit=crop&w=900&q=80" alt="Close-up of textured stone" />
+          <figcaption>Body fossils preserve parts of the organism itself.</figcaption>
+        </figure>
+        <figure>
+          <img src="https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=900&q=80" alt="Tree resin color image" />
+          <figcaption>Amber preservation can capture small organisms in hardened resin.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="formation" class="tab-content">
+      <h2>Formation Process</h2>
+      <img class="image-banner" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1400&q=80" alt="Sedimentary landscape" />
+      <p>Fossilization, formally studied as <strong>taphonomy</strong>, is rare. Several conditions must happen in the right order for an organism to become preserved.</p>
+
+      <h3>1. Death and Exposure</h3>
+      <p>An organism dies and begins to face scavenging, decomposition, and physical damage.</p>
+
+      <h3>2. Rapid Burial</h3>
+      <p>Sediment covers the remains, reducing oxygen exposure and slowing decay. This is one of the most important steps.</p>
+
+      <h3>3. Soft Tissue Decay</h3>
+      <p>Most soft tissue breaks down, while hard parts such as bones, shells, and teeth are more likely to survive.</p>
+
+      <h3>4. Mineralization</h3>
+      <p>Groundwater carrying minerals fills spaces in the remains or replaces the original material over time.</p>
+
+      <h3>5. Lithification</h3>
+      <p>The surrounding sediment compacts and cements into rock, preserving the fossil inside.</p>
+
+      <h3>6. Uplift, Erosion, and Discovery</h3>
+      <p>Tectonic uplift and erosion expose the rock layers. Eventually, a fossil may be discovered by scientists or fossil hunters.</p>
+    </section>
+
+    <section id="discoveries" class="tab-content">
+      <h2>Famous Discoveries</h2>
+      <p>Some fossil discoveries changed how scientists understand evolution and Earth history.</p>
+
+      <div class="fossil-card">
+        <h3><em>Archaeopteryx lithographica</em> — The First Bird</h3>
+        <div class="meta">Bavaria, Germany • First recognized 1861</div>
+        <p><em>Archaeopteryx</em> had both dinosaur-like and bird-like features, making it important evidence for the evolutionary link between dinosaurs and birds.</p>
+      </div>
+
+      <div class="fossil-card">
+        <h3>Lucy — <em>Australopithecus afarensis</em></h3>
+        <div class="meta">Hadar, Ethiopia • 1974</div>
+        <p>Lucy showed that upright walking developed before large brain size in human evolution.</p>
+      </div>
+
+      <div class="fossil-card">
+        <h3><em>Tiktaalik roseae</em> — The Fish with Shoulders</h3>
+        <div class="meta">Ellesmere Island, Arctic Canada • Published 2006</div>
+        <p><em>Tiktaalik</em> is a transitional fossil between fish and early four-limbed vertebrates.</p>
+      </div>
+
+      <div class="fossil-card">
+        <h3>Sue the <em>T. rex</em></h3>
+        <div class="meta">Hell Creek Formation, South Dakota • 1990</div>
+        <p>Sue is one of the largest and most complete <em>Tyrannosaurus rex</em> skeletons ever found.</p>
+      </div>
+    </section>
+
+    <section id="references" class="tab-content">
+      <h2>References</h2>
+      <p>The following sources were used in the research and writing of this site.</p>
+
+      <h3>Textbooks</h3>
+      <ol class="ref-list">
+        <li>Benton, M.J. &amp; Harper, D.A.T. (2009). <em>Introduction to Paleobiology and the Fossil Record</em>. Wiley-Blackwell.</li>
+        <li>Prothero, D.R. (2013). <em>Bringing Fossils to Life</em> (3rd ed.). Columbia University Press.</li>
+        <li>Briggs, D.E.G. &amp; Crowther, P.R. (eds.) (1990). <em>Palaeobiology: A Synthesis</em>. Blackwell Scientific.</li>
+      </ol>
+
+      <h3>Journal Articles</h3>
+      <ol class="ref-list">
+        <li>Daeschler, E.B., Shubin, N.H. &amp; Jenkins, F.A. (2006). A Devonian tetrapod-like fish and the evolution of the tetrapod body plan. <em>Nature</em>, 440, 757–763.</li>
+        <li>Leakey, M.D. &amp; Hay, R.L. (1979). Pliocene footprints in the Laetolil Beds at Laetoli, northern Tanzania. <em>Nature</em>, 278, 317–323.</li>
+        <li>Allentoft, M.E. et al. (2012). The half-life of DNA in bone. <em>Proceedings of the Royal Society B</em>, 279, 4724–4733.</li>
+      </ol>
+    </section>
+  </main>
+
+  <footer>
+    GEOL201 Earth History — Fossils Website
+  </footer>
+
+  <script>
+    function showTab(id, btn) {
+      document.querySelectorAll('.tab-content').forEach(section => {
+        section.classList.remove('active');
+      });
+
+      document.querySelectorAll('nav button').forEach(button => {
+        button.classList.remove('active');
+      });
+
+      document.getElementById(id).classList.add('active');
+      btn.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
 </body>
 </html>
